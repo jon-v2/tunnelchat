@@ -40,3 +40,16 @@ export const commandInfo = (command, nickname) => {
 
   console.log(`${command}`.magenta + (nickname ? ` ${nickname}`.blue : ""));
 };
+
+export const titleScreen = () => {
+  console.log(" _                          _      _           _   ".rainbow);
+  console.log("| |                        | |    | |         | |  ".rainbow);
+  console.log("| |_ _   _ _ __  _ __   ___| | ___| |__   __ _| |_ ".rainbow);
+  console.log(
+    "| __| | | | '_ \\| '_ \\ / _ \\ |/ __| '_ \\ / _` | __|".rainbow
+  );
+  console.log("| |_| |_| | | | | | | |  __/ | (__| | | | (_| | |_ ".rainbow);
+  console.log(
+    " \\__|\\__,_|_| |_|_| |_|\\___|_|\\___|_| |_|\\__,_|\\__|".rainbow
+  );
+};
