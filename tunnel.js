@@ -1,26 +1,29 @@
 import { tunnel } from "cloudflared";
+import { error, success, info } from "./utils";
 
 export let stopTunnel;
 
 export const initTunnel = async (port) => {
+  info("Starting tunnel...");
   const { url, connections, child, stop } = tunnel({
     "--url": "http://localhost:" + port,
   });
 
   stopTunnel = stop;
 
-  console.log("LINK:", await url);
+  await url.then((url) => {
+    success("Your tunnel is ready!");
+    info("Tunnel URL: " + url);
+  });
 
   const conns = await Promise.all(connections);
 
-  console.log("Connections Ready!", conns);
-
   process.on("exit", () => {
-    console.log("Stopping tunnel");
+    error("Stopping tunnel");
     stop();
   });
 
   child.on("exit", (code) => {
-    console.log("tunnel process exited with code", code);
+    error("tunnel process exited with code " + code);
   });
 };
